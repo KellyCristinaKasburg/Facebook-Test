@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+	<title>Quiz Mitologia Grega</title>
+	<meta charset="utf-8">
+<!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/script.css">
+    <style type="text/css">
+ body {
+   margin: 0;
+   padding: 0;
+   width: 100%;
+   height: 100vh;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-family: 'Arial', sans-serif;
+   color: #000;
+   background: url("Imagens/MonteOlimpo.png");
+}
+</style>
+</head>
+
+<body onload="nextQuestion()">
+    <script type="text/javascript">
+    var nextQuestion, handleNext = new FaceTest();
+    </script>
+
+        <div id="lateral">
+        </div>
+        <h3></h3>
+        <div id="question">
+            <h1 id="questionText"></h1>
+        <p>Respostas corretas, receberam o símbolo de Athena <img src="Imagens/Coruja.png" width="18">, caso contrário, a Medusa te atormentará! <img src="Imagens/medusa.png" width="18"></p>
+        <p>
+        </div>
+        <section class="question-content">
+            
+            <div id="answers">
+            </div>
+            
+        </section>
+        <p>
+        <button id="submitButton" onClick="handleNext()">Próximo</button>
+
+    <script type="text/javascript" src="js/fila.js"></script>
+    <script type="text/javascript" src="js/ListaEncadeada.js"></script>
+    <script type="text/javascript" src="js/pilha.js"></script>      
+    <script type="text/javascript" src="js/FaceTest.js"></script>
+    </body>
+</html>
