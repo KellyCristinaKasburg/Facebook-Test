@@ -14,35 +14,35 @@ loadAnswers();
 loadImageGifts(); 
 loadCorrectAnswers();
 
-function nextQuestion() {  // Cria a próxima pergunta e alternativas
+this.nextQuestion = function() {  // Cria a próxima pergunta e alternativas
     document.getElementById("answers").innerHTML = ""; 
     document.getElementById("questionText").innerHTML = questions.readFirst(); 
     for (var i = 0; i < 5; i++){
         var radioHtml = '<input class="answer" id="answer" type="radio" name="answer" value="' + 
-        answersId + '" checked> ' + answers.removeFirst(); + ' </input>'; 
-        var answer = document.createElement("div");
+        answersId + '" checked> ' + answers.removeFirst(); + ' </input>'; // Cria o elemento radio, com o ID da resposta
+        var answer = document.createElement("div"); // Cria a div e coloca o HTML do radio dentro
         answer.innerHTML = radioHtml;
-        document.getElementById("answers").appendChild(answer);a
+        document.getElementById("answers").appendChild(answer); //div na alternativa
         answersId++;
     }
 }
 
-function handleNext() { // Função que faz validações antes de chamar a proxima questão
-    this.questionsArray[this.questionsCount] = questions.removeFirst(); 
+this.handleNext = function() { // Função que faz validações antes de chamar a proxima questão
+    this.questionsArray[this.questionsCount] = questions.removeFirst();  //armazena a pergunta no vetor
     var answerId = document.querySelector('input[type=radio]:checked').value;
     this.answersArray[this.questionsCount] = answerId;
     if (questionsCount != 9) { 
-        receiveGift(answerId);
-        nextQuestion();
-        this.questionsCount++;
+        receiveGift(answerId); 
+        nextQuestion(); //proxima pergunta
+        this.questionsCount++; //conta as perguntas respondidas
     } else {
         calculatePowerLevel();
 
         document.getElementById("answers").innerHTML = "";
         document.getElementById("question").innerHTML = ""; 
-        document.getElementById("submitButton").remove();   
+        document.getElementById("submitButton").remove();   //Tira elementos desnecessarios 
 
-        var title = document.createElement("div");
+        var title = document.createElement("div"); //Div´s para o HTML
         var message = document.createElement("div");
         var image = document.createElement("div");
         var points = document.createElement("div");
@@ -50,7 +50,7 @@ function handleNext() { // Função que faz validações antes de chamar a proxi
         var clear=document.getElementById('lateral');
         clear.setAttribute('style', 'display: none;');
 
-        var titleText = '<h2> Você terminou! </h2>';  // Cria os HTML's baseados nos pontos e nos níveis
+        var titleText = '<h2> Você terminou! </h2>';  //Cria os HTML's baseados nos pontos e nos níveis
         var messageText;
         var imageIcon;
         var pointsText = '<h1> Acertou ' + Level + '/10</h1>';
@@ -75,14 +75,14 @@ function handleNext() { // Função que faz validações antes de chamar a proxi
         image.id = "final-content";
         points.id = "final-content";
 
-        document.getElementById("answers").appendChild(title);   //Coloca as div's criadas no HTML
+        document.getElementById("answers").appendChild(title);   //As div's criadas vão para as div´s do HTML
         document.getElementById("answers").appendChild(message);
         document.getElementById("answers").appendChild(image);
         document.getElementById("answers").appendChild(points);
     }
 }
 
-function loadQuestions() { // Função que carrega as perguntas
+this.loadQuestions = function() { // Função que carrega as perguntas
     this.questions.insert("Quem era o Deus mais jovem da primeira geração do Olimpo?");
     this.questions.insert("Afrodite, uma das Deusas mais conhecida da mitologia grega. Oque ela representava?");
     this.questions.insert("Atena, considerava dois animais sagrados. Quais eram?");
@@ -95,7 +95,7 @@ function loadQuestions() { // Função que carrega as perguntas
     this.questions.insert("Qual é o/a primeiro(a) deus(a) a nascer?");
 }
 
-function loadAnswers() { // Função que carrega as respostas
+this.loadAnswers = function() { // Função que carrega as respostas
     this.answers.insertFirst("Héstia"); //certo
     this.answers.insertFirst("Ártemis");
     this.answers.insertFirst("Poseidon");
@@ -157,7 +157,7 @@ function loadAnswers() { // Função que carrega as respostas
     this.answers.insertFirst("Zeus"); //certo
 }
 
-function loadCorrectAnswers() { //Função que carrega as respostas corretas baseadas no ID
+this.loadCorrectAnswers = function() { //Função que carrega as respostas corretas baseadas no ID
 
     this.correctAnswersArray[0] = "1";
     this.correctAnswersArray[1] = "10";
@@ -171,29 +171,29 @@ function loadCorrectAnswers() { //Função que carrega as respostas corretas bas
     this.correctAnswersArray[9] = "50";
 }
 
-function loadImageGifts() {  //Carrega as imagens das recompensa finais
+this.loadImageGifts = function() {  //Carrega as imagens das recompensa finais
     this.imagesGift.push('<img src="Imagens/Zeus-Hercules.gif">'); 
     this.imagesGift.push('<img src="Imagens/Desculpas.gif'); 
 }
 
-function receiveGift(answerId) {  //Cria a Moeda-Recompensa
-    var stackImagesGift = new Stack();  // Cria a pilha das imagens de recompensa
+this.receiveGift = function(answerId) {  //Cria a Moeda-Recompensa
+    var stackImagesGift = new Stack();  //A pilha das imagens de recompensa
     stackImagesGift.push('<img class="imgrecon" src="Imagens/Coruja.png">');
     stackImagesGift.push('<img class="imgrecon" src="Imagens/medusa.png">');
 
     var imageGift = null;
     if(answerId === this.correctAnswersArray[this.questionsCount]){ //A resposta é correta, então é colocada na pilha
         stackImagesGift.pop();
-        imageGift = stackImagesGift.peek();
+        imageGift = stackImagesGift.peek(); //Se for correta, é Zeus e Hercules
     } else {
-        imageGift = stackImagesGift.peek();
+        imageGift = stackImagesGift.peek(); //Se não é os lacaios de Hades
     }
-    var divElement = document.createElement('div');
+    var divElement = document.createElement('div'); //Documento vai para a div
     divElement.innerHTML = imageGift;
     document.getElementById("lateral").appendChild(divElement); //coloca a div na lateral
 }
 
-function calculatePowerLevel() {  // Checa as respostas selecionas 
+this.calculatePowerLevel = function() {  // Checa as respostas selecionas 
     for (var i = 0; i < this.answersArray.length; i++) { // Vai correr os vetores das respostas
         if (this.answersArray[i] === this.correctAnswersArray[i]) {
             this.Level++;
