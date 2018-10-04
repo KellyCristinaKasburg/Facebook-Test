@@ -1,11 +1,11 @@
-function ListaEncadeada() {
+function ListaEncadeada(){
 
-    constructor() {
+    this.constructor = function() {
         this.quantity = 0;
         this.first = null;
     } 
     
-    insertFirst(element) {
+    this.insertFirst = function(element) {
         var node = {
             element : element,
             prox : this.first  // Insere o primeiro elemento na fila
@@ -14,7 +14,7 @@ function ListaEncadeada() {
         this.quantity++;
     }
 
-    removeFirst() {
+    this.removeFirst = function(){
         if (this.first === null){
             return null;
         } else {
