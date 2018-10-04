@@ -4,13 +4,11 @@ function fila() {
         this.items = [];
     }
 
-    // Insere
-    insert(element) {
+    this.insert = function(element) {   // Adiciona elementos
         this.items[this.items.length] = element;
     }
 
-    // Tira o primeiro elemento
-    removeFirst() {
+    this.removeFirst = function() {
         if (this.items.length > 0){   // Devolve o primeiro elemento
             var item = this.items[0];
             this.items.splice(0,1);
@@ -20,7 +18,7 @@ function fila() {
         }
     }
 
-    readFirst() {
+    this.readFirst = function() {
         if (this.items.length > 0){  // Devolve o primeiro elemento
             return this.items[0];
         } else {
